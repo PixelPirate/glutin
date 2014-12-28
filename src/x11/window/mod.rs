@@ -1,4 +1,4 @@
-use {Event, WindowBuilder};
+use {Event, BuilderAttribs};
 use CreationError;
 use CreationError::OsError;
 use libc;
@@ -86,7 +86,7 @@ pub struct Window {
 }
 
 impl Window {
-    pub fn new(builder: WindowBuilder) -> Result<Window, CreationError> {
+    pub fn new(builder: BuilderAttribs) -> Result<Window, CreationError> {
         ensure_thread_init();
         let dimensions = builder.dimensions.unwrap_or((800, 600));
 
@@ -305,7 +305,7 @@ impl Window {
             });
 
             let share = if let Some(win) = builder.sharing {
-                win.window.x.context
+                win.x.context
             } else {
                 ptr::null()
             };
